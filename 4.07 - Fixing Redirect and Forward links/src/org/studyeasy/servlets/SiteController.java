@@ -64,7 +64,9 @@ public class SiteController extends HttpServlet {
 			HttpSession newSession = request.getSession(true);
 			newSession.setMaxInactiveInterval(300);
 			newSession.setAttribute("username", username);
-			response.sendRedirect(request.getContextPath()+"/MemberAreaController?action=memberarea");
+			//encode will allow to login even with cookie disabled on web browser
+			String encode = response.encodeURL(request.getContextPath());
+			response.sendRedirect(encode+"/MemberAreaController?action=memberarea");
 		}else {
 			response.sendRedirect(request.getContextPath()+"/SiteController?action=login");
 		}		
